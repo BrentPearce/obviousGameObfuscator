@@ -56,7 +56,7 @@ void setUpGeme(string &name, string &characterClass){
 void encode(string &toEncode){
   // key for xor and array for number of bits to rotate
   const char key[3] = "42";
-  const int rotate[4] = {1, 3, 5, 2};
+  const long int rotate[4] = {1, 7, 3, 5};
   const int char_bits = 8; //asuming using an ascii encoding.
       //do we want to add some indirection using pointers?
 
@@ -67,12 +67,13 @@ void encode(string &toEncode){
     char k = key[i%2];
     if(k != toEncode[i]){
       //use the current key to conditionally xor the string
-      toEncode[i] = toEncode[i] ^ k; 
+      toEncode[i] = toEncode[i] ^ k;
+      toEncode[i] = (toEncode[i] << rotate[i%4])| 
+                        (toEncode[i] >> (char_bits - rotate[i%4]));
     }
-    //and then use the rotate and char_bits to bit rotate the char
-    //(n << d)|(n >> (CHAR_BITS - d)); 
-    //see https://www.geeksforgeeks.org/rotate-bits-of-an-integer/
-   
+    
+  
+
   }
   
   
