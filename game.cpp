@@ -1,84 +1,98 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
-string* setUpGeme();
 
 void encode(string &toEncode);
 void decode(string &toEncode);
 void saveToFile(string &save);
 string readFromFile();
 
+
 int main(){
+  bool isStatFileThere = false;
+  string *character = new string[2];
+  character[0] = "Jordan";
+  character[1] = "Knight";
+  int gold,  intell, attack, defense, agility, swordAttack, swordDefense; 
+  float health, staminia;
+ 
+
+  if(true)// change to !isStatFileThere eventually once check is in place
+  {
+    cout << "****************************************";
+    cout << "****************************************\n";
+    cout << "Your name is Jordan and you are a Knight.\n";
+    gold = 10;
+    cout << "You have " << gold <<  " gold coins. \n";
+    intell = 75;
+    cout << "Your intelligence is " << intell << ".\n";
+    attack = defense = agility = 50;
+    cout << "Your attack is " << attack << ".\n";
+    cout << "Your defense is " << defense << ".\n";
+    cout << "Your agility is " << agility << ".\n";
+    swordAttack = 10; 
+    cout << "Your sword has an attack boost of " << swordAttack << ".\n";
+    swordDefense = 5;
+    cout << "Your sword has an defense boost of " << swordDefense << ".\n";
+    health = 100.0;
+    std::cout << std::fixed << std::setprecision(1);
+    cout << "Your health is " << health << ".\n";
+    staminia = 99.9; 
+    cout << "Your stamina is " << staminia << ".\n";
+
+    
+    //encode the values and then write them to a file using saveToFile()
+    cout << "Saving the game. \n";
+    cout << "****************************************";
+    cout << "****************************************\n";   
+  }
+  else
+  {
+
+    // see if the file has been tampered with
+
+    // if yes 
+      //tell the person they cheated and the that the values are being reset 
+      //then reset and display the values.
+
+    // if no 
+      //read the values from the file and display them 
+
+  }
 
 
-  //int startingGold = 10, intell = 75, attack = 50, defense = 50, agility = 50;   
-
-  //float health = 100.0, staminia = 99.9;
+ 
 
 
-
-  //string *name = setUpGame();  
-
-  //encode somehow and save to a file..
+  /* Uncomment for debuging/testing
   string s;
   cout << "Enter a string\n";
   cin >> s; 
   cout << s << endl;
+  */
+
+  /* Uncomment to test encoding and decoding
   encode(s);
   cout << s << endl;
-  cout << " " << endl;
   decode(s);
   cout << s << endl;
+  */
 
-  saveToFile(s);
-  s = readFromFile();
+  //uncomment to test saving and reading
+  //saveToFile(s);
+  //s = readFromFile();
   
   return 0;
-}
-
-
-  string* setUpGame(){
-
-  string name;
-  cout << "Enter name (string)" << endl;
-  cin >> name;
-
-  string characterClass;
-  cout << "Enter character class" << endl;
-  cin >> characterClass;
-
-  cout << "Starting gold is: 100 " << endl;
-
-  cout << "Intelligence is: 75" << endl;
-
-  cout << "Attack is 50" << endl;
-
-  cout << "Defense is 50" << endl;
-
-  cout << "Agility is 50 " << endl;  
-
-  cout << "Heatlth is 100.0" <<endl;
-
-  cout << "Stamina is 99.9" << endl;
-
-  string *character = new string[2];
-  
-  cout<<"Saving"<<endl;
- 
-  character[0] = name;
-  character[1] = characterClass;
-
-  return character;
-
 }
 
 //thinking this could maybe be called inside a funtion backupToFIle 
 // or something...
 void encode(string &toEncode){
-  // key for xor and 
+  // key for xor 
   const char XOR_KEY[4] = "~42";
       //do we want to add some indirection using pointers?
 
@@ -87,6 +101,7 @@ void encode(string &toEncode){
   {
     //alternate between the first two chars 
     char k = XOR_KEY[i%3];
+    
     if(k != toEncode[i] && toEncode[i] != 0){
       //use the current key to conditionally xor the string
       toEncode[i] = toEncode[i] ^ k;
@@ -100,16 +115,14 @@ void decode(string &toDecode){
   const char XOR_KEY[4] = "~42";
 
    for (int i = 0; i < toDecode.length(); i++) {
-       //get current key
-        char k = XOR_KEY[i%3];
-        if (toDecode[i] != 0 && toDecode[i] != k)
-        {
-          toDecode[i] = toDecode[i] ^ k;
-        }
-    
+    //get current key
+    char k = XOR_KEY[i%3];
+
+    if (toDecode[i] != 0 && toDecode[i] != k)
+    {
+      toDecode[i] = toDecode[i] ^ k;
+    }
   }
-  
-  
 }
 
 void saveToFile(string &save){
