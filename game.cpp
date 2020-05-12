@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -7,6 +8,8 @@ string* setUpGeme();
 
 void encode(string &toEncode);
 void decode(string &toEncode);
+void saveToFile(string &save);
+string readFromFile();
 
 int main(){
 
@@ -17,7 +20,7 @@ int main(){
 
 
 
-  //string *name = setUpGeme();  
+  //string *name = setUpGame();  
 
   //encode somehow and save to a file..
   string s;
@@ -30,10 +33,14 @@ int main(){
   decode(s);
   cout << s << endl;
 
+  saveToFile(s);
+  s = readFromFile();
+  
   return 0;
 }
 
-  string* setUpGeme(){
+
+  string* setUpGame(){
 
   string name;
   cout << "Enter name (string)" << endl;
@@ -59,6 +66,8 @@ int main(){
 
   string *character = new string[2];
   
+  cout<<"Saving"<<endl;
+ 
   character[0] = name;
   character[1] = characterClass;
 
@@ -102,3 +111,31 @@ void decode(string &toDecode){
   
   
 }
+
+void saveToFile(string &save){
+//This function will take a string and save it to a file
+//The file output will be hardcoded as gameData and will only write to the first line
+    ofstream saveState;
+    saveState.open ("gameData");
+    //cout << "Saving to file: " << save << endl;  //Uncomment for debugging
+    saveState << save;
+    saveState.close();
+}
+
+string readFromFile() {
+//This function will read the contents of a file and return the string
+//The file name is hardcoded as gameData and should only have anything written to the first line
+    string data;
+    ifstream saveState ("gameData");
+    if (saveState.is_open()) {
+        getline (saveState, data) ;
+       // cout << "The file contains: "<< data  << endl;  //Uncomment for debugging
+        saveState.close();
+        return data;
+    }
+    else {
+        cout << "Unable to open file"; 
+        return "ERROR";
+    }
+}
+
