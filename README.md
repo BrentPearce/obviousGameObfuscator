@@ -23,7 +23,8 @@ an appropriate compiler for C++.
 
 ## Use
 
-![Image of program startup](www.github.com/brentpearce/obviousGameObfuscator/resources/gameSetup.png "Game at startup")
+![Game at Startup](https://github.com/BrentPearce/obviousGameObfuscator/blob/master/resources/gameSetup.png "Game at startup")
+
 The program when run will initialize the characters stats and display them to the console window (as shown in the image
 above). The game will then wait for a keyboard press and then attempt to check if the encoded parameters have been
 changed. If the program detects the parameters have been changed while the program is running, then the program will
