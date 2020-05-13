@@ -21,13 +21,11 @@ int main(){
   character[0] = "Jordan";
   character[1] = "Knight";
   int gold,  intell, attack, defense, agility, swordAttack, swordDefense; 
-  float health, staminia;
+  float health, stamina;
  
 
   if(true)// change to !isStatFileThere eventually once check is in place
   {
-    cout << "****************************************";
-    cout << "****************************************\n";
     cout << "Your name is Jordan and you are a Knight.\n";
     gold = 10;
     cout << "You have " << gold <<  " gold coins. \n";
@@ -44,14 +42,13 @@ int main(){
     health = 100.0;
     std::cout << std::fixed << std::setprecision(1);
     cout << "Your health is " << health << ".\n";
-    staminia = 99.9; 
-    cout << "Your stamina is " << staminia << ".\n";
+    stamina = 99.9; 
+    cout << "Your stamina is " << stamina << ".\n";
 
     //encode the values and then write them to a file using saveToFile()
-    cout << "Saving the game. \n";
+    cout << "The game is now saved\n";
+  
 
-     cout << "****************************************";
-    cout << "****************************************\n";   
   }
   else
   {
