@@ -29,4 +29,14 @@ above). The game will then wait for a keyboard press and then attempt to check i
 changed. If the program detects the parameters have been changed while the program is running, then the program will
 display a warning (as shown below) and overwrite them with default values.
 
-[Insert image of warning message here]
+Insert image of warning message here
+
+Additionally, once the games parameters have been encoded and save the program can be closed. When the program is
+reopened the program will read the values from the file and decode them and display the player's stats (as shown below).
+
+Insert image of opening game after closing without tampering
+
+If the program detects the encoded values have been altered between closing and opening then program will display a
+warning message and reset the values as shown below.
+
+Insert image of warning message and resetting values
