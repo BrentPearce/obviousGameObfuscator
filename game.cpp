@@ -95,7 +95,7 @@ int main(){
   return 0;
 }
 
-//thinking this could maybe be called inside a funtion backupToFIle 
+//thinking this could maybe be called inside a function backupToFIle 
 // or something...
 void encode(string &toEncode){
   // key for xor 
