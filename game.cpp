@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 
+
 using namespace std;
 
 
@@ -10,7 +11,9 @@ void encode(string &toEncode);
 void decode(string &toEncode);
 void saveToFile(string &save);
 string readFromFile();
+int validateFile();
 
+size_t fileHash;
 
 int main(){
   bool isStatFileThere = false;
@@ -44,10 +47,10 @@ int main(){
     staminia = 99.9; 
     cout << "Your stamina is " << staminia << ".\n";
 
-    
     //encode the values and then write them to a file using saveToFile()
     cout << "Saving the game. \n";
-    cout << "****************************************";
+
+     cout << "****************************************";
     cout << "****************************************\n";   
   }
   else
@@ -65,8 +68,17 @@ int main(){
   }
 
 
- 
-
+    //Testing for the validate and file read/write functions
+/*    //-----------------------------------------------------
+    string test = "test"; 
+    saveToFile(test);
+    cout << fileHash << endl;
+    int validation = validateFile();
+    int c = getchar();  //This will pause the program, at least on linux.  During this time you may modify the data file to test the validate function
+    validation =  validateFile();
+    string lastTest = readFromFile();
+    cout << lastTest << endl;
+*/    //End Testing ----------------------------------------
 
   /* Uncomment for debuging/testing
   string s;
@@ -82,9 +94,6 @@ int main(){
   cout << s << endl;
   */
 
-  //uncomment to test saving and reading
-  //saveToFile(s);
-  //s = readFromFile();
   
   return 0;
 }
@@ -128,11 +137,14 @@ void decode(string &toDecode){
 void saveToFile(string &save){
 //This function will take a string and save it to a file
 //The file output will be hardcoded as gameData and will only write to the first line
+//The global variable fileHash will also be set   
+    hash<string> thisFileHash;
     ofstream saveState;
     saveState.open ("gameData");
     //cout << "Saving to file: " << save << endl;  //Uncomment for debugging
     saveState << save;
     saveState.close();
+    fileHash = thisFileHash(save);
 }
 
 string readFromFile() {
@@ -152,3 +164,29 @@ string readFromFile() {
     }
 }
 
+
+int validateFile() {
+//Returns 0 if the file is valid
+//Returns 1 if the file is not valid an will reset the file to the default values
+    string data;
+    hash<string> thisFileHash;
+    ifstream saveState ("gameData");
+
+    if (saveState.is_open()) {
+        getline (saveState, data);
+        if (fileHash != thisFileHash(data)) {
+            //Restore defaults
+            cout << "File is invalid.  Restoring Defaults." << endl;
+            return 1;
+        }
+        else {
+            cout << "File is valid" << endl;  //Uncomment for debugging
+            return 0;
+        }
+    }
+    else {
+        cout << "Unable to verify file because the file could not be opened." << endl;
+        return 1;
+    }    
+    return 2; //This should not be reached
+}
