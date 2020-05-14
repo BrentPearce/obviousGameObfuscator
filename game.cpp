@@ -12,6 +12,8 @@ void decode(string &toEncode);
 void saveToFile(string &save);
 string readFromFile();
 int validateFile();
+void parser(string str);
+int* arrayHandler(string str);
 
 size_t fileHash;
 
@@ -186,4 +188,43 @@ int validateFile() {
         return 1;
     }    
     return 2; //This should not be reached
+}
+
+void parser(string str) {
+    int len = str.length() - 1;
+    int ident = stoi(str.substr(0, 1));
+    string newstring = str.substr(1, len);
+    int newInt = 0;
+    float newFloat = 0.0;
+    int* newArr;
+    switch (ident) {
+        case 1: newInt = stoi(newstring);
+        case 2: newFloat = stof(newstring);
+        case 3: newArr = arrayHandler(newstring);
+        case 4: NULL;
+    }
+}
+
+int* arrayHandler(string str) {
+    int len = str.length();
+    static int* arr = new int[len];
+    for (int k = 0; k < len; ++k) {
+        arr[k] = 0;
+    }
+    int i, j = 0;
+    for (i = 0; str[i] != '\0'; ++i) {
+        if (str[i] == ',')
+            continue;
+        if (str[i] == ' ') {
+            j++;
+        }
+        else {
+            arr[j] = arr[j] * 10 + (str[i] - 48);
+        }
+    }
+    cout << "arr[] = ";
+    for (i = 0; i <= j; i++) {
+        cout << arr[i] << " ";
+    }
+    return arr;
 }
