@@ -15,7 +15,7 @@ string readFromFile();
 int validateFile();
 void parser(string str);
 int* arrayHandler(string str);
-void extractValues(const string& input);
+vector<string> extractValues(const string& input);
 
 size_t fileHash;
 
@@ -62,7 +62,34 @@ int main(){
     savedData = savedData + "t" + to_string(stamina);
     cout << "Here's what you got: " << savedData;  
 
-    extractValues(savedData);
+
+
+    vector<string> extractedVariables;
+    extractedVariables = extractValues(savedData);
+
+    for (int i = 0; i < extractedVariables.size(); i++)
+    {
+      cout << "Here is the string:" << extractedVariables[i]<<endl;
+    }
+    
+    
+    int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded; 
+    float healthDecoded, staminaDecoded;
+
+
+
+
+    goldDecoded = stoi(extractedVariables[1]);
+    intellDecoded = stoi(extractedVariables[2]); 
+    attackDecoded = stoi(extractedVariables[3]);
+    defenseDecoded = stoi(extractedVariables[4]); 
+    agilityDecoded = stoi(extractedVariables[5]);
+    swordAttackDecoded = stoi(extractedVariables[6]); 
+    swordDefenseDecoded = stoi(extractedVariables[7]); 
+    healthDecoded = stof(extractedVariables[8]);
+    staminaDecoded = stof(extractedVariables[9]);
+
+
 
   }
   else
@@ -110,15 +137,19 @@ int main(){
   return 0;
 }
 
-void extractValues(const string& input){
+vector<string> extractValues(const string& input){
   smatch values;
-  regex rgx("g([+-]?([0-9]*[.])?[0-9]+)i([+-]?([0-9]*[.])?[0-9]+)a([+-]?([0-9]*[.])?[0-9]+)d([+-]?([0-9]*[.])?[0-9]+)y([+-]?([0-9]*[.])?[0-9]+)s([+-]?([0-9]*[.])?[0-9]+)e([+-]?([0-9]*[.])?[0-9]+)h([+-]?([0-9]*[.])?[0-9]+)t([+-]?([0-9]*[.])?[0-9]+)");
+  regex rgx("g[-+]?([0-9]*[.][0-9]+|[0-9]+)i[-+]?([0-9]*[.][0-9]+|[0-9]+)a[-+]?([0-9]*[.][0-9]+|[0-9]+)d[-+]?([0-9]*[.][0-9]+|[0-9]+)y[-+]?([0-9]*[.][0-9]+|[0-9]+)s[-+]?([0-9]*[.][0-9]+|[0-9]+)e[-+]?([0-9]*[.][0-9]+|[0-9]+)h[-+]?([0-9]*[.][0-9]+|[0-9]+)t[-+]?([0-9]*[.][0-9]+|[0-9]+)");
 
   regex_search(input.begin(), input.end(), values, rgx);
-  cout << "Here is gold: " << values[1];
-  cout << "Here is intelligence" << values[3];
-  cout << "Here is attack" << values[5];
+  cout << "Here is the length" << values.size();
+  vector<string> parameters;
+  for(int i =0; i< values.size(); i++){
+    parameters.push_back(values.str(i));
+  }
   
+  return parameters;
+
 }
 
 //thinking this could maybe be called inside a function backupToFIle 
