@@ -2,7 +2,8 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
-
+#include <typeinfo>
+#include <regex>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ string readFromFile();
 int validateFile();
 void parser(string str);
 int* arrayHandler(string str);
+void extractValues(const string& input);
 
 size_t fileHash;
 
@@ -49,7 +51,18 @@ int main(){
 
     //encode the values and then write them to a file using saveToFile()
     cout << "The game is now saved\n";
-  
+
+    //Store the values
+
+    string savedData;
+    savedData = "g" + to_string(gold) + "i" + to_string(intell);
+    savedData = savedData + "a" + to_string(attack) + "d" + to_string(defense);
+    savedData = savedData + "y" + to_string(agility) + "s" + to_string(swordAttack);
+    savedData = savedData + "e" + to_string(swordDefense) + "h" + to_string(health);
+    savedData = savedData + "t" + to_string(stamina);
+    cout << "Here's what you got: " << savedData;  
+
+    extractValues(savedData);
 
   }
   else
@@ -95,6 +108,17 @@ int main(){
 
   
   return 0;
+}
+
+void extractValues(const string& input){
+  smatch values;
+  regex rgx("g([+-]?([0-9]*[.])?[0-9]+)i([+-]?([0-9]*[.])?[0-9]+)a([+-]?([0-9]*[.])?[0-9]+)d([+-]?([0-9]*[.])?[0-9]+)y([+-]?([0-9]*[.])?[0-9]+)s([+-]?([0-9]*[.])?[0-9]+)e([+-]?([0-9]*[.])?[0-9]+)h([+-]?([0-9]*[.])?[0-9]+)t([+-]?([0-9]*[.])?[0-9]+)");
+
+  regex_search(input.begin(), input.end(), values, rgx);
+  cout << "Here is gold: " << values[1];
+  cout << "Here is intelligence" << values[3];
+  cout << "Here is attack" << values[5];
+  
 }
 
 //thinking this could maybe be called inside a function backupToFIle 
@@ -190,6 +214,8 @@ int validateFile() {
     return 2; //This should not be reached
 }
 
+
+
 void parser(string str) {
     int len = str.length() - 1;
     int ident = stoi(str.substr(0, 1));
@@ -228,3 +254,4 @@ int* arrayHandler(string str) {
     }
     return arr;
 }
+
