@@ -84,8 +84,10 @@ int main(){
        cout << savedData;
     encode(savedData);
     cout << "Here is the encoded data: " << endl;
-  cout << savedData;
+    cout << savedData;
 
+    saveToFile(savedData);
+    cout << "Here is what's read: " << readFromFile();
 /*
   cout << "Here is the decoded data" << endl;
 
@@ -232,13 +234,14 @@ void saveToFile(string &save){
 //The global variable fileHash will also be set   
 
   //TODO: rearange the function to hash earlier and then save the hash in the file
-    hash<string> thisFileHash;
-    ofstream saveState;
-    saveState.open ("gameData");
+    
+    ofstream myFile;
+    myFile.open ("gameData");
     //cout << "Saving to file: " << save << endl;  //Uncomment for debugging
-    saveState << save;
-    saveState.close();
-    fileHash = thisFileHash(save);
+    myFile << save;
+    myFile.close();
+    //hash<string> thisFileHash;
+    //fileHash = thisFileHash(save);
 }
 
 string readFromFile() {
@@ -250,6 +253,7 @@ string readFromFile() {
     ifstream saveState ("gameData");
     if (saveState.is_open()) {
         getline (saveState, data) ;
+        cout << "Read line";
        // cout << "The file contains: "<< data  << endl;  //Uncomment for debugging
         saveState.close();
         return data;
