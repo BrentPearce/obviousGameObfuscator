@@ -4,7 +4,7 @@
 
 **Encoding**
 
-This project uses a simple xor encoding to disquise the varriables used in the game.  We chose to uses xor because it is simple to impliment and it is a two way function.
+This project uses a simple xor encoding to disguise the varriables used in the game.  We chose to uses xor because it is simple to impliment and it is a two way function.
 The encoding and decoding is handled by two separate functions as well as a parser and a function to re-assemble the values for each varriable.  We decided that storing 
 the variables as one large string would further obfuscate the game varriables from attackers.
 
