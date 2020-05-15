@@ -80,10 +80,19 @@ int main(){
     {
       savedData = savedData +  to_string(acquiredItemsStrength[i]) + ", ";
     }
-        
+       cout << "Here is the data before encoding data: " << endl; 
+       cout << savedData;
     encode(savedData);
-    cout << "Here is the encoded data: " << savedData;
+    cout << "Here is the encoded data: " << endl;
+  cout << savedData;
+
+/*
+  cout << "Here is the decoded data" << endl;
+
+  decode(savedData);
+  cout << savedData << endl;
     saveToFile(savedData);
+*/
 
     /*
     cout << "The game is now saved\n";
