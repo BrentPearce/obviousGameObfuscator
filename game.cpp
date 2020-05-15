@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <typeinfo>
+#include <sstream>
 #include <regex>
 
 using namespace std;
@@ -16,7 +17,8 @@ int validateFile();
 void parser(string str);
 int* arrayHandler(string str);
 vector<string> extractValues(const string& input);
-
+bool checkFile();
+ 
 size_t fileHash;
 
 int main(){
@@ -28,8 +30,11 @@ int main(){
   float health, stamina;
   string dataFromFIle;
 
+  //Begin initial file load and check if one exists, else initialize the game
+  isStatFileThere = checkFile();
 
-  if(true)// change to !isStatFileThere eventually once check is in place
+
+  if(!isStatFileThere)
   {
     cout << "Your name is Jordan and you are a Knight.\n";
     gold = 10;
@@ -312,4 +317,32 @@ int* arrayHandler(string str) {
         cout << arr[i] << " ";
     }
     return arr;
+}
+
+//This will attempt to open the two required save files
+// True if the files are available and valid
+// False if files are not available or are invalid
+bool checkFile() {
+
+  ifstream saveState ("gameData");
+  ifstream saveHash ("gameData.hash");
+  string hashString;
+  int validation;
+    if (saveState.is_open() && saveHash.is_open()) {
+        cout<<"Found save state and hash"<<endl;
+        getline(saveHash,hashString);
+        istringstream iss(hashString);
+        iss >> fileHash;
+        saveState.close();
+        saveHash.close();
+        cout<<fileHash<<endl;
+        validation = validateFile();
+        if (validation == 0) {return true;}
+        else {return false;}
+    }
+    else {
+        cout << "Unable to find valid save state."<<endl;
+        return false;
+    }
+
 }
