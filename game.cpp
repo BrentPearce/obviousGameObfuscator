@@ -75,6 +75,7 @@ int main(){
     cout << "Here is the string after encoding: "<<endl;
     cout << savedData << endl;
 
+    saveToFile(savedData);
     cout << "The game is now saved\n";
 
     //Store the values
@@ -83,13 +84,15 @@ int main(){
 
 
 
-
-    decode(savedData);
-    cout << "Here is the string after decoding: " << endl;
+    string savedDataFromFile;
+    savedDataFromFile = readFromFile();
+    cout << "Here is the string from file before decoding: " << endl;
+    decode(savedDataFromFile);
+    cout << "Here is the string from file after decoding: " << endl;
     cout << savedData << endl;
 
     vector<string> extractedVariables;
-    extractedVariables = extractValues(savedData);
+    extractedVariables = extractValues(savedDataFromFile);
 
     for (int i = 0; i < extractedVariables.size(); i++)
     {
