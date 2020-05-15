@@ -57,11 +57,14 @@ int main(){
    acquiredItemsStrength.push_back(47);
    acquiredItemsStrength.push_back(777);
 
+<<<<<<< HEAD
 
     //encode the values and then write them to a file using saveToFile()
 
       //Store the values in a string
 
+=======
+>>>>>>> 65c98d42ab1d2dd2c298b064c0e7ba24c594c346
     string savedData;
     savedData = "g" + to_string(gold) + "i" + to_string(intell);
     savedData = savedData + "a" + to_string(attack) + "d" + to_string(defense);
@@ -74,10 +77,33 @@ int main(){
     {
       savedData = savedData +  to_string(acquiredItemsStrength[i]) + ", ";
     }
+<<<<<<< HEAD
    
 
 
     //Store the values
+=======
+  
+
+
+    //encode the values and then write them to a file using saveToFile()
+    encode(savedData);
+    cout << "Here is the string after encoding: "<<endl;
+    cout << savedData << endl;
+
+    cout << "The game is now saved\n";
+
+    //Store the values
+
+
+
+
+
+
+    decode(savedData);
+    cout << "Here is the string after decoding: " << endl;
+    cout << savedData << endl;
+>>>>>>> 65c98d42ab1d2dd2c298b064c0e7ba24c594c346
 
     string savedData;
     savedData = "g" + to_string(gold) + "i" + to_string(intell);
@@ -112,11 +138,15 @@ int main(){
     // }
     
     
+
+
+
     int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded; 
     float healthDecoded, staminaDecoded;
     vector<int> aquiredItemsStrengthDecoded;
 
 
+<<<<<<< HEAD
 
 
     gold= stoi(extractedVariables[1]);
@@ -128,6 +158,17 @@ int main(){
     swordDefense= stoi(extractedVariables[7]); 
     health= stof(extractedVariables[8]);
     stamina= stof(extractedVariables[9]);
+=======
+    goldDecoded = stoi(extractedVariables[1]);
+    intellDecoded = stoi(extractedVariables[2]); 
+    attackDecoded = stoi(extractedVariables[3]);
+    defenseDecoded = stoi(extractedVariables[4]); 
+    agilityDecoded = stoi(extractedVariables[5]);
+    swordAttackDecoded = stoi(extractedVariables[6]); 
+    swordDefenseDecoded = stoi(extractedVariables[7]); 
+    healthDecoded = stof(extractedVariables[8]);
+    staminaDecoded = stof(extractedVariables[9]);
+>>>>>>> 65c98d42ab1d2dd2c298b064c0e7ba24c594c346
     extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
   }
   else
