@@ -90,14 +90,6 @@ int main(){
 
      extractedVariables = extractValues(savedData);
 
-    // for (int i = 0; i < extractedVariables.size(); i++)
-    // {
-    //   cout << "Here is the string:" << extractedVariables[i]<<endl;
-    // }
-
-
-
-
 
     int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded;
     float healthDecoded, staminaDecoded;
@@ -106,7 +98,7 @@ int main(){
 
 
 
-
+/*
     gold= stoi(extractedVariables[1]);
     intell= stoi(extractedVariables[2]);
     attack= stoi(extractedVariables[3]);
@@ -116,20 +108,31 @@ int main(){
     swordDefense= stoi(extractedVariables[7]);
     health= stof(extractedVariables[8]);
     stamina= stof(extractedVariables[9]);
-
+*/
     extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
   }
   else
   {
-
-    // see if the file has been tampered with
-
-    // if yes
-      //tell the person they cheated and the that the values are being reset
-      //then reset and display the values.
-
-    // if no
+      //File has already been validated successfuly
       //read the values from the file and display them
+    vector<string> extractedVariables;
+    extractedVariables = extractValues(readFromFile());
+   
+
+    int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded;
+    float healthDecoded, staminaDecoded;
+    vector<int> aquiredItemsStrengthDecoded;
+
+//    gold= stoi(extractedVariables[1]);
+//    intell= stoi(extractedVariables[2]);
+//    attack= stoi(extractedVariables[3]);
+//    defense= stoi(extractedVariables[4]);
+//    agility= stoi(extractedVariables[5]);
+//    swordAttack= stoi(extractedVariables[6]);
+//    swordDefense= stoi(extractedVariables[7]);
+//    health= stof(extractedVariables[8]);
+//    stamina= stof(extractedVariables[9]);
+    extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
 
   }
 
@@ -160,7 +163,7 @@ int main(){
   cout << s << endl;
   */
 
-
+    cout << "Game over"<<endl;
   return 0;
 }
 
