@@ -18,7 +18,7 @@ void parser(string str);
 int* arrayHandler(string str);
 vector<string> extractValues(const string& input);
 bool checkFile();
- 
+
 size_t fileHash;
 
 int main(){
@@ -117,7 +117,7 @@ int main(){
       //read the values from the file and display them
     vector<string> extractedVariables;
     extractedVariables = extractValues(readFromFile());
-   
+
 
     int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded;
     float healthDecoded, staminaDecoded;
@@ -220,7 +220,7 @@ void decode(string &toDecode){
 void saveToFile(string &save){
 //This function will take a string and save it to a file
 //The file output will be hardcoded as gameData and will only write to the first line
-//The global variable fileHash will also be set   
+//The global variable fileHash will also be set
 
     hash<string> thisFileHash;
     ofstream saveState;
@@ -267,6 +267,46 @@ int validateFile() {
         if (fileHash != thisFileHash(data)) {
             //Restore defaults
             cout << "File is invalid.  Restoring Defaults." << endl;
+
+            string *character = new string[2];
+            character[0] = "Jordan";
+            character[1] = "Knight";
+            int gold,  intell, attack, defense, agility, swordAttack, swordDefense;
+            float health, stamina;
+            gold = 10;
+            intell = 75;
+            attack = defense = agility = 50;
+            swordAttack = 10;
+            swordDefense = 5;
+            health = 100.0;
+            std::cout << std::fixed << std::setprecision(1);
+            stamina = 99.9;
+            vector<int> acquiredItemsStrength;
+            acquiredItemsStrength.push_back(1);
+            acquiredItemsStrength.push_back(2);
+            acquiredItemsStrength.push_back(9);
+            acquiredItemsStrength.push_back(52);
+            acquiredItemsStrength.push_back(47);
+            acquiredItemsStrength.push_back(777);
+
+
+            string savedData;
+            savedData = "g" + to_string(gold) + "i" + to_string(intell);
+            savedData = savedData + "a" + to_string(attack) + "d" + to_string(defense);
+            savedData = savedData + "y" + to_string(agility) + "s" + to_string(swordAttack);
+            savedData = savedData + "e" + to_string(swordDefense) + "h" + to_string(health);
+            savedData = savedData + "t" + to_string(stamina);
+
+            savedData = savedData + "VV";
+            for (int i = 0; i < acquiredItemsStrength.size(); i++)
+            {
+              savedData = savedData +  to_string(acquiredItemsStrength[i]) + ", ";
+            }
+
+            encode(savedData);
+            saveToFile(savedData);
+            cout << "The game is now reset\n";
+
             return 1;
         }
         else {
