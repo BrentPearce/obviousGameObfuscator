@@ -56,12 +56,6 @@ int main(){
     aquiredItemsStrength.push_back(47);
     aquiredItemsStrength.push_back(777);
 
-
-    //encode the values and then write them to a file using saveToFile()
-    cout << "The game is now saved\n";
-
-    //Store the values
-
     string savedData;
     savedData = "g" + to_string(gold) + "i" + to_string(intell);
     savedData = savedData + "a" + to_string(attack) + "d" + to_string(defense);
@@ -73,12 +67,26 @@ int main(){
     {
       savedData = savedData +  to_string(aquiredItemsStrength[i]) + ", ";
     }
-    
+  
 
 
-    cout << "Here's what you got: " << savedData;  
+    //encode the values and then write them to a file using saveToFile()
+    encode(savedData);
+    cout << "Here is the string after encoding: "<<endl;
+    cout << savedData << endl;
+
+    cout << "The game is now saved\n";
+
+    //Store the values
 
 
+
+
+
+
+    decode(savedData);
+    cout << "Here is the string after decoding: " << endl;
+    cout << savedData << endl;
 
     vector<string> extractedVariables;
     extractedVariables = extractValues(savedData);
@@ -89,11 +97,12 @@ int main(){
     }
     
     
+
+
+
     int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded; 
     float healthDecoded, staminaDecoded;
     vector<int> aquiredItemsStrengthDecoded;
-
-
 
 
     goldDecoded = stoi(extractedVariables[1]);
