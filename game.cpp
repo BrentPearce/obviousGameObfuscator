@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
-
+#include <typeinfo>
 
 using namespace std;
 
@@ -49,7 +49,16 @@ int main(){
 
     //encode the values and then write them to a file using saveToFile()
     cout << "The game is now saved\n";
-  
+
+    //Store the values
+
+    string savedData;
+    savedData = "g" + to_string(gold) + "i" + to_string(intell);
+    savedData = savedData + "a" + to_string(attack) + "d" + to_string(defense);
+    savedData = savedData + "y" + to_string(agility) + "s" + to_string(swordAttack);
+    savedData = savedData + "e" + to_string(swordDefense) + "h" + to_string(health);
+    savedData = savedData + "t" + to_string(stamina);
+    cout << "Here's what you got: " << savedData;  
 
   }
   else
@@ -190,6 +199,8 @@ int validateFile() {
     return 2; //This should not be reached
 }
 
+
+
 void parser(string str) {
     int len = str.length() - 1;
     int ident = stoi(str.substr(0, 1));
@@ -228,3 +239,4 @@ int* arrayHandler(string str) {
     }
     return arr;
 }
+
