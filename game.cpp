@@ -214,7 +214,7 @@ void decode(string &toDecode){
     }
   }
 }
-
+//I changed something
 void saveToFile(string &save){
 //This function will take a string and save it to a file
 //The file output will be hardcoded as gameData and will only write to the first line
