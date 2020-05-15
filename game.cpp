@@ -48,6 +48,14 @@ int main(){
     cout << "Your health is " << health << ".\n";
     stamina = 99.9; 
     cout << "Your stamina is " << stamina << ".\n";
+    vector<int> aquiredItemsStrength;
+    aquiredItemsStrength.push_back(1);
+    aquiredItemsStrength.push_back(2);
+    aquiredItemsStrength.push_back(9);
+    aquiredItemsStrength.push_back(52);
+    aquiredItemsStrength.push_back(47);
+    aquiredItemsStrength.push_back(777);
+
 
     //encode the values and then write them to a file using saveToFile()
     cout << "The game is now saved\n";
@@ -60,6 +68,14 @@ int main(){
     savedData = savedData + "y" + to_string(agility) + "s" + to_string(swordAttack);
     savedData = savedData + "e" + to_string(swordDefense) + "h" + to_string(health);
     savedData = savedData + "t" + to_string(stamina);
+    savedData = savedData + "VV";
+    for (int i = 0; i < aquiredItemsStrength.size(); i++)
+    {
+      savedData = savedData +  to_string(aquiredItemsStrength[i]) + ", ";
+    }
+    
+
+
     cout << "Here's what you got: " << savedData;  
 
 
@@ -75,6 +91,7 @@ int main(){
     
     int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded; 
     float healthDecoded, staminaDecoded;
+    vector<int> aquiredItemsStrengthDecoded;
 
 
 
@@ -88,9 +105,7 @@ int main(){
     swordDefenseDecoded = stoi(extractedVariables[7]); 
     healthDecoded = stof(extractedVariables[8]);
     staminaDecoded = stof(extractedVariables[9]);
-
-
-
+    extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
   }
   else
   {
@@ -139,14 +154,14 @@ int main(){
 
 vector<string> extractValues(const string& input){
   smatch values;
-  regex rgx("g[-+]?([0-9]*[.][0-9]+|[0-9]+)i[-+]?([0-9]*[.][0-9]+|[0-9]+)a[-+]?([0-9]*[.][0-9]+|[0-9]+)d[-+]?([0-9]*[.][0-9]+|[0-9]+)y[-+]?([0-9]*[.][0-9]+|[0-9]+)s[-+]?([0-9]*[.][0-9]+|[0-9]+)e[-+]?([0-9]*[.][0-9]+|[0-9]+)h[-+]?([0-9]*[.][0-9]+|[0-9]+)t[-+]?([0-9]*[.][0-9]+|[0-9]+)");
+  regex rgx("g[-+]?([0-9]*[.][0-9]+|[0-9]+)i[-+]?([0-9]*[.][0-9]+|[0-9]+)a[-+]?([0-9]*[.][0-9]+|[0-9]+)d[-+]?([0-9]*[.][0-9]+|[0-9]+)y[-+]?([0-9]*[.][0-9]+|[0-9]+)s[-+]?([0-9]*[.][0-9]+|[0-9]+)e[-+]?([0-9]*[.][0-9]+|[0-9]+)h[-+]?([0-9]*[.][0-9]+|[0-9]+)t[-+]?([0-9]*[.][0-9]+|[0-9]+)VV(.*)");
 
   regex_search(input.begin(), input.end(), values, rgx);
-  cout << "Here is the length" << values.size();
   vector<string> parameters;
   for(int i =0; i< values.size(); i++){
     parameters.push_back(values.str(i));
   }
+  
   
   return parameters;
 
