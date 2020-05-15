@@ -24,10 +24,10 @@ int main(){
   string *character = new string[2];
   character[0] = "Jordan";
   character[1] = "Knight";
-  int gold,  intell, attack, defense, agility, swordAttack, swordDefense; 
+  int gold,  intell, attack, defense, agility, swordAttack, swordDefense;
   float health, stamina;
   string dataFromFIle;
-  
+
 
   if(true)// change to !isStatFileThere eventually once check is in place
   {
@@ -40,14 +40,14 @@ int main(){
     cout << "Your attack is " << attack << ".\n";
     cout << "Your defense is " << defense << ".\n";
     cout << "Your agility is " << agility << ".\n";
-    swordAttack = 10; 
+    swordAttack = 10;
     cout << "Your sword has an attack boost of " << swordAttack << ".\n";
     swordDefense = 5;
     cout << "Your sword has an defense boost of " << swordDefense << ".\n";
     health = 100.0;
     std::cout << std::fixed << std::setprecision(1);
     cout << "Your health is " << health << ".\n";
-    stamina = 99.9; 
+    stamina = 99.9;
     cout << "Your stamina is " << stamina << ".\n";
     vector<int> acquiredItemsStrength;
    acquiredItemsStrength.push_back(1);
@@ -57,53 +57,6 @@ int main(){
    acquiredItemsStrength.push_back(47);
    acquiredItemsStrength.push_back(777);
 
-<<<<<<< HEAD
-
-    //encode the values and then write them to a file using saveToFile()
-
-      //Store the values in a string
-
-=======
->>>>>>> 65c98d42ab1d2dd2c298b064c0e7ba24c594c346
-    string savedData;
-    savedData = "g" + to_string(gold) + "i" + to_string(intell);
-    savedData = savedData + "a" + to_string(attack) + "d" + to_string(defense);
-    savedData = savedData + "y" + to_string(agility) + "s" + to_string(swordAttack);
-    savedData = savedData + "e" + to_string(swordDefense) + "h" + to_string(health);
-    savedData = savedData + "t" + to_string(stamina);
-
-   savedData = savedData + "VV";
-    for (int i = 0; i < acquiredItemsStrength.size(); i++)
-    {
-      savedData = savedData +  to_string(acquiredItemsStrength[i]) + ", ";
-    }
-<<<<<<< HEAD
-   
-
-
-    //Store the values
-=======
-  
-
-
-    //encode the values and then write them to a file using saveToFile()
-    encode(savedData);
-    cout << "Here is the string after encoding: "<<endl;
-    cout << savedData << endl;
-
-    cout << "The game is now saved\n";
-
-    //Store the values
-
-
-
-
-
-
-    decode(savedData);
-    cout << "Here is the string after decoding: " << endl;
-    cout << savedData << endl;
->>>>>>> 65c98d42ab1d2dd2c298b064c0e7ba24c594c346
 
     string savedData;
     savedData = "g" + to_string(gold) + "i" + to_string(intell);
@@ -117,11 +70,11 @@ int main(){
     {
       savedData = savedData +  to_string(acquiredItemsStrength[i]) + ", ";
     }
-        
+
     encode(savedData);
     saveToFile(savedData);
     cout << "The game is now saved\n";
-    
+
     //TODO: Add code to pause for modification.
     cout << "The game is now paused press a key to continue\n";
     int c = getchar();
@@ -136,39 +89,29 @@ int main(){
     // {
     //   cout << "Here is the string:" << extractedVariables[i]<<endl;
     // }
-    
-    
 
 
 
-    int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded; 
+
+
+    int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded;
     float healthDecoded, staminaDecoded;
     vector<int> aquiredItemsStrengthDecoded;
 
 
-<<<<<<< HEAD
+
 
 
     gold= stoi(extractedVariables[1]);
-    intell= stoi(extractedVariables[2]); 
+    intell= stoi(extractedVariables[2]);
     attack= stoi(extractedVariables[3]);
-    defense= stoi(extractedVariables[4]); 
+    defense= stoi(extractedVariables[4]);
     agility= stoi(extractedVariables[5]);
-    swordAttack= stoi(extractedVariables[6]); 
-    swordDefense= stoi(extractedVariables[7]); 
+    swordAttack= stoi(extractedVariables[6]);
+    swordDefense= stoi(extractedVariables[7]);
     health= stof(extractedVariables[8]);
     stamina= stof(extractedVariables[9]);
-=======
-    goldDecoded = stoi(extractedVariables[1]);
-    intellDecoded = stoi(extractedVariables[2]); 
-    attackDecoded = stoi(extractedVariables[3]);
-    defenseDecoded = stoi(extractedVariables[4]); 
-    agilityDecoded = stoi(extractedVariables[5]);
-    swordAttackDecoded = stoi(extractedVariables[6]); 
-    swordDefenseDecoded = stoi(extractedVariables[7]); 
-    healthDecoded = stof(extractedVariables[8]);
-    staminaDecoded = stof(extractedVariables[9]);
->>>>>>> 65c98d42ab1d2dd2c298b064c0e7ba24c594c346
+
     extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
   }
   else
@@ -176,19 +119,19 @@ int main(){
 
     // see if the file has been tampered with
 
-    // if yes 
-      //tell the person they cheated and the that the values are being reset 
+    // if yes
+      //tell the person they cheated and the that the values are being reset
       //then reset and display the values.
 
-    // if no 
-      //read the values from the file and display them 
+    // if no
+      //read the values from the file and display them
 
   }
 
 
     //Testing for the validate and file read/write functions
 /*    //-----------------------------------------------------
-    string test = "test"; 
+    string test = "test";
     saveToFile(test);
     cout << fileHash << endl;
     int validation = validateFile();
@@ -201,7 +144,7 @@ int main(){
   /* Uncomment for debuging/testing
   string s;
   cout << "Enter a string\n";
-  cin >> s; 
+  cin >> s;
   cout << s << endl;
   */
 
@@ -212,7 +155,7 @@ int main(){
   cout << s << endl;
   */
 
-  
+
   return 0;
 }
 
@@ -225,24 +168,24 @@ vector<string> extractValues(const string& input){
   for(int i =0; i< values.size(); i++){
     parameters.push_back(values.str(i));
   }
-  
-  
+
+
   return parameters;
 
 }
 
-//thinking this could maybe be called inside a function backupToFIle 
+//thinking this could maybe be called inside a function backupToFIle
 // or something...
 void encode(string &toEncode){
-  // key for xor 
+  // key for xor
   const char XOR_KEY[4] = "~42";
 
   // start by xor with the key
   for (int i = 0; i <toEncode.length(); i++)
   {
-    //alternate between the first two chars 
+    //alternate between the first two chars
     char k = XOR_KEY[i%3];
-    
+
     if(k != toEncode[i] && toEncode[i] != 0){
       //use the current key to conditionally xor the current char in the string
       toEncode[i] = toEncode[i] ^ k;
@@ -271,21 +214,24 @@ void saveToFile(string &save){
 //The file output will be hardcoded as gameData and will only write to the first line
 //The global variable fileHash will also be set   
 
-  //TODO: rearange the function to hash earlier and then save the hash in the file
     hash<string> thisFileHash;
     ofstream saveState;
+    ofstream saveHash;
     saveState.open ("gameData");
     //cout << "Saving to file: " << save << endl;  //Uncomment for debugging
     saveState << save;
     saveState.close();
     fileHash = thisFileHash(save);
+
+    saveHash.open("gameData.hash");
+    saveHash << fileHash;
+    saveHash.close();
 }
 
 string readFromFile() {
 //This function will read the contents of a file and return the string
 //The file name is hardcoded as gameData and should only have anything written to the first line
 
-//TODO: Change so that it returns a string array so we can get the hash too.
     string data;
     ifstream saveState ("gameData");
     if (saveState.is_open()) {
@@ -295,7 +241,7 @@ string readFromFile() {
         return data;
     }
     else {
-        cout << "Unable to open file"; 
+        cout << "Unable to open file";
         return "ERROR";
     }
 }
@@ -323,7 +269,7 @@ int validateFile() {
     else {
         cout << "Unable to verify file because the file could not be opened." << endl;
         return 1;
-    }    
+    }
     return 2; //This should not be reached
 }
 
@@ -367,4 +313,3 @@ int* arrayHandler(string str) {
     }
     return arr;
 }
-
