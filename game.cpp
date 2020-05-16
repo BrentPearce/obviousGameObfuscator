@@ -16,6 +16,7 @@ string readFromFile();
 int validateFile();
 void parser(string str);
 int* arrayHandler(string str);
+vector<int> vectorHandler(string str);
 vector<string> extractValues(const string& input);
 bool checkFile();
 
@@ -329,12 +330,13 @@ void parser(string str) {
     string newstring = str.substr(1, len);
     int newInt = 0;
     float newFloat = 0.0;
+    vector<int> newVec;
     int* newArr;
     switch (ident) {
         case 1: newInt = stoi(newstring);
         case 2: newFloat = stof(newstring);
-        case 3: newArr = arrayHandler(newstring);
-        case 4: NULL;
+        case 3: newVec = vectorHandler(newstring);
+        case 4: newArr = arrayHandler(newstring);
     }
 }
 
@@ -360,6 +362,18 @@ int* arrayHandler(string str) {
         cout << arr[i] << " ";
     }
     return arr;
+}
+
+vector<int> vectorHandler(string str) {
+    stringstream ss(str);
+    vector<int> vec;
+    stringstream ssr(str);
+    int num;
+
+    while (ssr >> num) {
+        vec.push_back(num);
+    }
+    return vec;
 }
 
 //This will attempt to open the two required save files
