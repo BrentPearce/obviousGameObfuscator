@@ -334,9 +334,14 @@ void parser(string str) {
     int* newArr;
     switch (ident) {
         case 1: newInt = stoi(newstring);
+            break;
         case 2: newFloat = stof(newstring);
+            break;
         case 3: newVec = vectorHandler(newstring);
+            break;
         case 4: newArr = arrayHandler(newstring);
+            break;
+        default: break;
     }
 }
 
@@ -357,15 +362,16 @@ int* arrayHandler(string str) {
             arr[j] = arr[j] * 10 + (str[i] - 48);
         }
     }
+    /*
     cout << "arr[] = ";
     for (i = 0; i <= j; i++) {
         cout << arr[i] << " ";
     }
+    */
     return arr;
 }
 
 vector<int> vectorHandler(string str) {
-    stringstream ss(str);
     vector<int> vec;
     stringstream ssr(str);
     int num;
@@ -373,6 +379,11 @@ vector<int> vectorHandler(string str) {
     while (ssr >> num) {
         vec.push_back(num);
     }
+    /*
+    for (auto i : vec) {
+        cout << i << "\n";
+    }
+    */
     return vec;
 }
 
