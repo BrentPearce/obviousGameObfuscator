@@ -117,24 +117,38 @@ int main(){
       //File has already been validated successfuly
       //read the values from the file and display them
     vector<string> extractedVariables;
-    extractedVariables = extractValues(readFromFile());
+    dataFromFIle = readFromFile();
+    encode(dataFromFIle);
+    extractedVariables = extractValues(dataFromFIle);
+    
 
 
     int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded;
     float healthDecoded, staminaDecoded;
     vector<int> aquiredItemsStrengthDecoded;
 
-//    gold= stoi(extractedVariables[1]);
-//    intell= stoi(extractedVariables[2]);
-//    attack= stoi(extractedVariables[3]);
-//    defense= stoi(extractedVariables[4]);
-//    agility= stoi(extractedVariables[5]);
-//    swordAttack= stoi(extractedVariables[6]);
-//    swordDefense= stoi(extractedVariables[7]);
-//    health= stof(extractedVariables[8]);
-//    stamina= stof(extractedVariables[9]);
+    gold= stoi(extractedVariables[1]);
+    cout << "Gold is " << gold << ".\n";
+    intell= stoi(extractedVariables[2]);
+    cout << "Intelligence is " << intell << ".\n";
+    attack= stoi(extractedVariables[3]);
+    cout << "Attack is " << attack << ".\n";
+    defense= stoi(extractedVariables[4]);
+    cout << "Defense is " << defense << ".\n";
+    agility= stoi(extractedVariables[5]);
+    cout << "Agility is " << agility << ".\n";
+    swordAttack= stoi(extractedVariables[6]);
+    cout << "Sword attack is " << swordAttack << ".\n";
+    swordDefense= stoi(extractedVariables[7]);
+    cout << "Sword defense is " << swordDefense << ".\n";
+    health= stof(extractedVariables[8]);
+    std::cout << std::fixed << std::setprecision(1);
+    
+    cout << "Health is " << health << ".\n";
+    stamina= stof(extractedVariables[9]);
+    cout << "Stamina is " << stamina << ".\n";
     extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
-
+    return 0;
   }
 
 
