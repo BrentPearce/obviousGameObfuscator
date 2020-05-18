@@ -56,12 +56,12 @@ int main(){
     stamina = 99.9;
     cout << "Your stamina is " << stamina << ".\n";
     vector<int> acquiredItemsStrength;
-   acquiredItemsStrength.push_back(1);
-   acquiredItemsStrength.push_back(2);
-   acquiredItemsStrength.push_back(9);
-   acquiredItemsStrength.push_back(52);
-   acquiredItemsStrength.push_back(47);
-   acquiredItemsStrength.push_back(777);
+    acquiredItemsStrength.push_back(1);
+    acquiredItemsStrength.push_back(2);
+    acquiredItemsStrength.push_back(9);
+    acquiredItemsStrength.push_back(52);
+    acquiredItemsStrength.push_back(47);
+    acquiredItemsStrength.push_back(777);
 
 
     string savedData;
@@ -81,21 +81,22 @@ int main(){
     saveToFile(savedData);
     cout << "The game is now saved\n";
 
-    //TODO: Add code to pause for modification.
     cout << "The game is now paused press a key to continue\n";
     int c = getchar();
-    //TODO: Get string from file
+
+    //WE AREN'T ACTUALLY TESTING FOR MODIFICATION HERE....
+
 
      vector<string> extractedVariables;
     //TODO: change to string pulled from file.
 
-     extractedVariables = extractValues(savedData);
+     extractedVariables = extractValues(savedData); //Here savedData is just a var not something from the file!
+    
 
-
-    int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded;
-    float healthDecoded, staminaDecoded;
-    vector<int> aquiredItemsStrengthDecoded;
-
+     //TODO: Need to update the global variable that stores the hash then validate the gameData file and hash.
+     
+     //TODO: Then we need to read from the file if it validates successfuly and extracted the values and probably print them
+     //We need to do this it is part of the assignment description.
 
 
 
@@ -112,7 +113,9 @@ int main(){
 */
     extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
   }
-  else
+  else //This else block is if the program is started and there is already a
+      // gameData and gameData.hash file and they are "good", ie. the program
+      // was run before and the files weren't tampered with.
   {
       //File has already been validated successfuly
       //read the values from the file and display them
@@ -143,7 +146,6 @@ int main(){
     cout << "Sword defense is " << swordDefense << ".\n";
     health= stof(extractedVariables[8]);
     std::cout << std::fixed << std::setprecision(1);
-    
     cout << "Health is " << health << ".\n";
     stamina= stof(extractedVariables[9]);
     cout << "Stamina is " << stamina << ".\n";
