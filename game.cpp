@@ -22,7 +22,7 @@ bool checkFile();
 
 size_t fileHash;
 
-int main(){
+int main() {
   bool isStatFileThere = false;
   string *character = new string[2];
   character[0] = "Jordan";
@@ -62,7 +62,7 @@ int main(){
     acquiredItemsStrength.push_back(52);
     acquiredItemsStrength.push_back(47);
     acquiredItemsStrength.push_back(777);
-
+    
 
     string savedData;
     savedData = "g" + to_string(gold) + "i" + to_string(intell);
@@ -84,34 +84,38 @@ int main(){
     cout << "The game is now paused press a key to continue\n";
     int c = getchar();
 
-    //WE AREN'T ACTUALLY TESTING FOR MODIFICATION HERE....
+    //After a pause check to see if the files were tamperd with or not
 
+         
+     if (checkFile()) { // true if not tamperd with.
 
-     vector<string> extractedVariables;
-    //TODO: change to string pulled from file.
-
-     extractedVariables = extractValues(savedData); //Here savedData is just a var not something from the file!
+        vector<string> extractedVariables;
+        savedData = readFromFile();
+        decode(savedData);
+        extractedVariables = extractValues(savedData); 
+        gold= stoi(extractedVariables[1]);
+        cout << "You have " << gold << "gold coins.\n";
+        intell= stoi(extractedVariables[2]);
+        cout << "Your intelligence is " << intell << ".\n";
+        attack= stoi(extractedVariables[3]);
+        defense= stoi(extractedVariables[4]);
+        agility= stoi(extractedVariables[5]);
+        cout << "Your attack is " << attack << ".\n";
+        cout << "Your defense is " << defense << ".\n";
+        cout << "Your agility is " << agility << ".\n";
+        swordAttack= stoi(extractedVariables[6]);
+        cout << "Your sword has an attack boost of " << swordAttack << ".\n";
+        swordDefense= stoi(extractedVariables[7]);
+        cout << "Your sword has an defense boost of " << swordDefense << ".\n";
+        health= stof(extractedVariables[8]);
+        std::cout << std::fixed << std::setprecision(1);
+        cout << "Your health is " << health << ".\n";
+        stamina= stof(extractedVariables[9]);
+        cout << "Your stamina is " << stamina << ".\n";
+        extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
+    }
+       
     
-
-     //TODO: Need to update the global variable that stores the hash then validate the gameData file and hash.
-     
-     //TODO: Then we need to read from the file if it validates successfuly and extracted the values and probably print them
-     //We need to do this it is part of the assignment description.
-
-
-
-/*
-    gold= stoi(extractedVariables[1]);
-    intell= stoi(extractedVariables[2]);
-    attack= stoi(extractedVariables[3]);
-    defense= stoi(extractedVariables[4]);
-    agility= stoi(extractedVariables[5]);
-    swordAttack= stoi(extractedVariables[6]);
-    swordDefense= stoi(extractedVariables[7]);
-    health= stof(extractedVariables[8]);
-    stamina= stof(extractedVariables[9]);
-*/
-    extractedVariables[10]; //HERE IS THE VECTOR READY TO BE PARSED
   }
   else //This else block is if the program is started and there is already a
       // gameData and gameData.hash file and they are "good", ie. the program
@@ -123,12 +127,6 @@ int main(){
     dataFromFIle = readFromFile();
     encode(dataFromFIle);
     extractedVariables = extractValues(dataFromFIle);
-    
-
-
-    int goldDecoded,  intellDecoded, attackDecoded, defenseDecoded, agilityDecoded, swordAttackDecoded, swordDefenseDecoded;
-    float healthDecoded, staminaDecoded;
-    vector<int> aquiredItemsStrengthDecoded;
 
     gold= stoi(extractedVariables[1]);
     cout << "Gold is " << gold << ".\n";
@@ -160,7 +158,8 @@ int main(){
     saveToFile(test);
     cout << fileHash << endl;
     int validation = validateFile();
-    int c = getchar();  //This will pause the program, at least on linux.  During this time you may modify the data file to test the validate function
+    int c = getchar();  //This will pause the program, at least on linux.
+    // During this time you may modify the data file to test the validate function
     validation =  validateFile();
     string lastTest = readFromFile();
     cout << lastTest << endl;
@@ -392,7 +391,7 @@ vector<int> vectorHandler(string str) {
     stringstream ssr(str);
     int num;
 
-    while (ssr >> num) {
+    while (ssr << num) {
         vec.push_back(num);
     }
     /*
