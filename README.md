@@ -29,7 +29,7 @@ changed. If the program detects the parameters have been changed while the progr
 display a warning (as shown below) and overwrite them with default values.
 
 
-![Runtime Tamper warning](https://github.com/BrentPearce/obviousGameObfuscator/blob/master/resources/runtimeTamper.png 
+![Runtime Tamper warning](https://github.com/BrentPearce/obviousGameObfuscator/blob/master/resources/runtimeTamper.png)
 
 Additionally, once the game parameters have been encoded and saved the program can be closed. When the program is
 reopened the program will read the values from the file and decode them and display the player's stats (as shown below).
