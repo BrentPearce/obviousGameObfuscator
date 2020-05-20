@@ -4,7 +4,7 @@ As a disclaimer this portion of the assignment was really difficult for me (Bren
 (compiling using gcc's g++ compiler produced strange results with imports such as CYGWIN). Similarly eventually,
 installing Visual Studio and compiling on a Machine with windows 10 produced more normal results, at least so it 
 seemed. However in reality, this apparently made the resulting PE file depend on dlls not installed in the Windows 8
-analysis machines created for the class. This meant I could only perform static analysis.As such I was unable to 
+analysis machines created for the class. This meant I could only perform static analysis. As such I was unable to 
 reverse engineer the key for the XOR encoding, or spoof our software. Additionally, IDA Pro was unable to display the 
 assembly in a graph mode and displayed an error message that the graph had over 1000 nodes(message shown below).
 
@@ -28,18 +28,18 @@ and "hashString". These are all located at about offset 407BD4. Searching furthe
 especially helpful.
 
 Stepping back we can consider that the program creates two files one called gameState and the other called
-gameState.hash. These are likely where the game parameters are stored durring and after runtime. Examining the contents
-of these files(shown below) we see that there must some sort of encoding and hashing.
+gameState.hash. These are likely where the game parameters are stored durring and after runtime (indeed they are).
+Examining the contents of these files(shown below) we see that there must some sort of encoding and hashing.
 
 ![gameData contents](https://github.com/BrentPearce/obviousGameObfuscator/blob/master/resources/gameDataContents.png)
 
 ![gameData hash](https://github.com/BrentPearce/obviousGameObfuscator/blob/master/resources/gameData.hashCat.png)
 
-With this in mind we can starting think about the encoding scheme, and that the contents of gameData must be hashed 
+With this in mind we can start thinking about the encoding scheme, and that the contents of gameData must be hashed 
 somehow. Looking at the strings window we don't see any telltale 64(or 32) length string that could be used for a 64
 (or 32 bit) encoding. So some other encoding scheme must be used. Additionally, looking at the imports we don't see any
-large cryptographic hashing functions being imported. While this doesn't preclude dynamic or runtime linking the fact,
-there is still a fairly large list of imports suggests that dynamic linking isn't used.
+large cryptographic hashing functions being imported. While this doesn't preclude dynamic or runtime linking the fact 
+that there is still a fairly large list of imports suggests that these linking stratagies aren't used.
 
 It's not unlikely, that either by sheer luck or trial and error, or with an educated guess, a hacker might look for an
 XOR encoding. Searching for an XOR opcode across the entire disassembly we see two offsets IDA Pro has kindly named
@@ -59,8 +59,8 @@ operation is called. This corresponds to the modulo 3 operation at inside the fo
 and jump statements inside the loop that each skip over the XOR operation which corresponds to the null preserving
 portion of our encode/decode functions.
 
-Unfortunately, because of the strange way IDA Pro analyzed the file it also becomes very difficult to determine which
-functions call the encode to try and see in greater detail what is being passed to encode and decode. As another result
+Unfortunately, because of the strange way IDA Pro analyzed the file it became very difficult to determine which
+function calls the encode to try and see in greater detail what is being passed to encode and decode. As another result
 of this behavior it nearly impossible to look at the larger structure of main.
 
 From here a more experienced reverse engineer might perform a dynamic analysis and try to pause the execution of the 
