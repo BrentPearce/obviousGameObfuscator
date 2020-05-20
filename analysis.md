@@ -1,7 +1,18 @@
 #Attack and Analysis
 
-For some reason the analysis performed by IDA Pro didn't allow us to find the function main. As we must begin looking 
-somewhere else. So, to begin the analysis we can look the output of the program when it is run. We see that it prints 
+As a disclaimer this portion of the assignment was really difficult for me (Brent). In my attempts to have a working PE
+(compiling using gcc's g++ compiler produced strange results with imports such as CYGWIN). Similarly eventually,
+installing Visual Studio and compiling on a Machine with windows 10 produced more normal results, at least so it 
+seemed. However in reality, this apparently made the resulting PE file depend on dlls not installed in the Windows 8
+analysis machines created for the class. This meant I could only perform static analysis.As such I was unable to 
+reverse engineer the key for the XOR encoding, or spoof our software. Additionally, IDA Pro was unable to display the 
+assembly in a graph mode and displayed an error message that the graph had over 1000 nodes(message shown below).
+
+
+![Too many nodes](https://github.com/BrentPearce/obviousGameObfuscator/blob/master/resources/IDA_Pro_graph_error.png)
+
+Additionally, the analysis performed by IDA Pro didn't allow us to find the function main. As such, we must begin looking 
+somewhere else. So, to begin the analysis we can look at the output of the program when it is run. We see that it prints 
 several string such as "You have 10 gold coins.". As an educated guess someone hacking this could probably infer that 
 in these strings the numbers are likely the game parameters. As such we can search for an initial substring such as 
 "gold coins". Sure enough examining the strings window in IDA Pro we see that the string gold coins, and several 
@@ -13,8 +24,8 @@ Following the string "gold coins." we find it is eventually used in at offset su
 natural place to examine. 
 
 Looking around this location, specifically looking up from there, we see the following strings: "saveState", "saveHash"
-and "hashString". These are all located at about offset 407BD4. Searching further we see other things but nothing
-isolated in a subroutine for easier analysis.
+and "hashString". These are all located at about offset 407BD4. Searching further we see other strings but nothing
+especially helpful.
 
 Stepping back we can consider that the program creates two files one called gameState and the other called
 gameState.hash. These are likely where the game parameters are stored durring and after runtime. Examining the contents
@@ -43,3 +54,15 @@ authors of PMA describe an XOR in a loop as being a red flag for XOR encoding(se
 
 ![Loop with XOR](https://github.com/BrentPearce/obviousGameObfuscator/blob/master/resources/loopXOR.png)
 
+Looking more closely we can also see the value 3 is being moved into a register immediately before and integer division
+operation is called. This corresponds to the modulo 3 operation at inside the for loop. Also, we can see two comparison
+and jump statements inside the loop that each skip over the XOR operation which corresponds to the null preserving
+portion of our encode/decode functions.
+
+Unfortunately, because of the strange way IDA Pro analyzed the file it also becomes very difficult to determine which
+functions call the encode to try and see in greater detail what is being passed to encode and decode. As another result
+of this behavior it nearly impossible to look at the larger structure of main.
+
+From here a more experienced reverse engineer might perform a dynamic analysis and try to pause the execution of the 
+program so that the unencrypted game parameters could be viewed and copied for use in manual decoding. However given
+the above listed complications I was unable to do that or perform any further analysis. 
